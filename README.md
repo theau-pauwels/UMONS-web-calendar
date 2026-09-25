@@ -88,4 +88,4 @@ ADMIN_SESSION_SECRET=une-valeur-aleatoire-longue
 BLOB_READ_WRITE_TOKEN=vercel_blob_rw_...
 ```
 
-Créer un Blob Store dans Vercel puis connecter celui-ci au projet pour obtenir automatiquement `BLOB_READ_WRITE_TOKEN`. Ne jamais préfixer les variables admin avec `NEXT_PUBLIC_` : elles doivent rester uniquement côté serveur.
+Créer un Blob Store dans Vercel et le connecter au projet. Les nouveaux stores utilisent l’authentification OIDC automatiquement ; un ancien store peut utiliser `BLOB_READ_WRITE_TOKEN`. Ne jamais préfixer les variables admin avec `NEXT_PUBLIC_` : elles doivent rester uniquement côté serveur.
