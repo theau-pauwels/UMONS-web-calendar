@@ -74,3 +74,18 @@ Les tests couvrent le parsing ICS, les ajouts/suppressions, déplacements, chang
 Le mode hors-ligne complet n'est pas activé : le manifeste web est présent, mais aucun service worker spécifique n'est installé.
 
 Le parsing des récurrences s'appuie sur `node-ical`. Les cas usuels RRULE, EXDATE et overrides sont traités ; des constructions iCalendar inhabituelles pourront nécessiter un ajustement après observation du flux réel.
+
+## Administration des noms de cours
+
+L'interface `/admin` permet de remplacer les noms bruts du flux UMONS par des noms plus lisibles pour les visiteurs. Les alias sont stockés dans Vercel Blob et appliqués côté serveur avant l'envoi du calendrier au navigateur.
+
+Variables d'environnement nécessaires :
+
+```env
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=un-mot-de-passe-long-et-unique
+ADMIN_SESSION_SECRET=une-valeur-aleatoire-longue
+BLOB_READ_WRITE_TOKEN=vercel_blob_rw_...
+```
+
+Créer un Blob Store dans Vercel et le connecter au projet. Les nouveaux stores utilisent l’authentification OIDC automatiquement ; un ancien store peut utiliser `BLOB_READ_WRITE_TOKEN`. Ne jamais préfixer les variables admin avec `NEXT_PUBLIC_` : elles doivent rester uniquement côté serveur.
