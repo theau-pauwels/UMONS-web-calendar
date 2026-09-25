@@ -14,7 +14,8 @@
     "next": "^15.5.3",
     "node-ical": "^0.20.1",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "@vercel/blob": "^1.0.2"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
