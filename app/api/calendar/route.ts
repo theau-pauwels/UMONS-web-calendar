@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCalendarText } from "@/lib/calendar-source";
 import { parseCalendar } from "@/lib/ics";
+import { applyCourseAliases, getCourseAliases } from "@/lib/course-aliases";
 
 export const runtime = "nodejs";
 
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const ics = await getCalendarText();
-    const events = parseCalendar(ics, from, to);
+    const events = applyCourseAliases(parseCalendar(ics, from, to), await getCourseAliases());
     return NextResponse.json(
       { events, fetchedAt: new Date().toISOString() },
       { headers: { "Cache-Control": "public, max-age=300, stale-while-revalidate=86400" } }
