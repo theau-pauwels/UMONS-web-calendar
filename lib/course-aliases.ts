@@ -21,10 +21,6 @@ export async function getCourseAliases(): Promise<CourseAliases> {
 }
 
 export async function saveCourseAliases(aliases: CourseAliases) {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    throw new Error("BLOB_READ_WRITE_TOKEN is not configured");
-  }
-
   const existing = await list({ prefix: BLOB_PATH, limit: 100 });
   await Promise.all(existing.blobs.map((blob) => del(blob.url)));
 
