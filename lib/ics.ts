@@ -7,6 +7,19 @@ function asIso(date: Date) {
   return new Date(date).toISOString();
 }
 
+function textValue(value: unknown, fallback = ""): string {
+  if (typeof value === "string") return value;
+  if (value == null) return fallback;
+
+  if (typeof value === "object") {
+    const candidate = value as { val?: unknown; value?: unknown };
+    if (typeof candidate.val === "string") return candidate.val;
+    if (typeof candidate.value === "string") return candidate.value;
+  }
+
+  return fallback;
+}
+
 export function parseCalendar(
   icsText: string,
   from: Date,
@@ -22,9 +35,9 @@ export function parseCalendar(
     const duration = event.end.getTime() - event.start.getTime();
     const base = {
       uid: String(event.uid || ""),
-      title: String(event.summary || "Sans titre"),
-      location: String(event.location || ""),
-      description: String(event.description || ""),
+      title: textValue(event.summary, "Sans titre"),
+      location: textValue(event.location),
+      description: textValue(event.description),
       allDay: Boolean(event.datetype === "date")
     };
 
@@ -37,9 +50,9 @@ export function parseCalendar(
           result.push({
             ...base,
             id: `${base.uid}:${recurrenceKey}`,
-            title: String(override.summary || base.title),
-            location: String(override.location || base.location),
-            description: String(override.description || base.description),
+            title: textValue(override.summary, base.title),
+            location: textValue(override.location, base.location),
+            description: textValue(override.description, base.description),
             start: asIso(override.start),
             end: asIso(override.end),
             allDay: Boolean(override.datetype === "date")
