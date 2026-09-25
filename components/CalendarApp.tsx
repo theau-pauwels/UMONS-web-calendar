@@ -84,7 +84,7 @@ export default function CalendarApp() {
     [anchor]
   );
   const days = useMemo(
-    () => eachDayOfInterval({ start: weekStart, end: weekEnd }).slice(0, 5),
+    () => eachDayOfInterval({ start: weekStart, end: weekEnd }),
     [weekStart, weekEnd]
   );
 
