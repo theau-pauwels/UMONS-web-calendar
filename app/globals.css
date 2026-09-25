@@ -81,3 +81,28 @@ h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); letter-spacing: -.04em; }
   .admin-row { grid-template-columns: 1fr; gap: 8px; }
   .admin-row-head { display: none; }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; color: #e5e7eb; background: #0f1115; }
+  body { background: #0f1115; }
+  .eyebrow, .week-title, .calendar-head span, .changes-heading p, .admin-header p { color: #9ca3af; }
+  .navigation button, .changes-heading button, .status, .changes-panel, .calendar-desktop,
+  .mobile-day, .modal, .admin-login, .admin-table, .admin-actions a {
+    background: #171a21; color: #e5e7eb; border-color: #303541;
+  }
+  .navigation button:hover, .changes-heading button:hover { background: #222630; }
+  .change-button, .admin-login button, .admin-actions button, .admin-savebar button {
+    background: #e5e7eb; color: #111827; border-color: #e5e7eb;
+  }
+  .change-card, .admin-row-head { background: #20242d; }
+  .change-card small, .description, .admin-message, .mobile-time, .mobile-event small { color: #aeb5c2; }
+  .calendar-head, .day-column, .admin-row, .mobile-event { border-color: #292e38; }
+  .hour-line { border-color: #242933; }
+  .hour-label, .empty { color: #737b8a; }
+  .event-card { background: #24304d; color: #e7edff; box-shadow: inset 3px 0 0 #7892e5; }
+  .modal-backdrop { background: rgba(0,0,0,.68); }
+  .status.error { color: #fecaca; background: #321b1e; border-color: #71323a; }
+  .admin-login input, .admin-row input { background: #11141a; color: #e5e7eb; border-color: #363c48; }
+  .admin-actions a { color: #e5e7eb; }
+  .admin-savebar { background: rgba(15,17,21,.95); border-color: #303541; }
+}
