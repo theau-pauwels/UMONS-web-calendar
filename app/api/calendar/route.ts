@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     const events = applyCourseAliases(parseCalendar(ics, from, to), await getCourseAliases());
     return NextResponse.json(
       { events, fetchedAt: new Date().toISOString() },
-      { headers: { "Cache-Control": "public, max-age=300, stale-while-revalidate=86400" } }
+      { headers: { "Cache-Control": "no-store, max-age=0" } }
     );
   } catch (error) {
     return NextResponse.json(
